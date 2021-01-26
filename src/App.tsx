@@ -1,10 +1,15 @@
-import React from 'react';
+import React from "react";
+// components
+import Timer from "./components/Timer/Timer";
+import MainWrapper from "./components/Wrappers/MainWrapper";
+// styles
+import 'antd/dist/antd.css';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Init RS-Clone Project</h1>
-    </div>
+    <MainWrapper>
+      <Timer />
+    </MainWrapper>
   );
 }
 
