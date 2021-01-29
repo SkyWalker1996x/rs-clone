@@ -1,13 +1,11 @@
-.header,
-.footer {
+.header {
     flex: 0 0 auto;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 15px;
-}
-.header {
+    padding: 25px 15px;
+    margin-bottom: 35px;
     border-bottom: 2px solid #1890FF;
 }
 .header__logo {
