@@ -1,0 +1,36 @@
+.header {
+    flex: 0 0 auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 15px;
+    margin-bottom: 35px;
+    border-bottom: 2px solid #1890FF;
+}
+.header__logo {
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0;
+}
+.nav-button {
+    position: relative;
+    height: 4px;
+    width: 40px;
+    background-color: #1890FF;
+}
+.nav-button::before,
+.nav-button::after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    height: 4px;
+    width: 40px;
+    background-color: #1890FF;
+}
+.nav-button::before {
+    top: -15px;
+}
+.nav-button::after {
+    top: 15px;
+}

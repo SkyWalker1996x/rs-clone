@@ -1,0 +1,29 @@
+.footer {
+    flex: 0 0 auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 15px;
+    border-top: 2px solid #1890FF;
+}
+.developers {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    text-align: center;
+}
+.developers a:not(:last-of-type) {
+    margin-right: 20px;
+}
+
+@media all and (max-width: 768px) {
+    .footer {
+        justify-content: center;
+    }
+    .developers {
+        width: 100%;
+    }
+}
