@@ -1,6 +1,5 @@
 import React from "react";
 import MainWrapper from "../Wrappers/MainWrapper";
-import './Table.css';
 import { transformTasksForTable } from '../../utils/taskGeneratingUtils'
 
 
