@@ -1,4 +1,4 @@
-import {FINISH_TASK, SET_TASK_NAME, START_TASK} from "../types";
+import {CLEAR_CURRENT_TASK, FINISH_TASK, SET_TASK_NAME, START_TASK} from "../types";
 import {v4 as uuidv4} from "uuid";
 
 export const setTaskName: any = (name: any) => {
@@ -22,5 +22,11 @@ export const finishTask: any = () => {
   return {
     type: FINISH_TASK,
     payload: Date.now(),
+  };
+};
+
+export const clearCurrentTask: any = () => {
+  return {
+    type: CLEAR_CURRENT_TASK,
   };
 };

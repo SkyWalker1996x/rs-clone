@@ -1,4 +1,9 @@
-import { FINISH_TASK, SET_TASK_NAME, START_TASK } from "../types";
+import {
+  CLEAR_CURRENT_TASK,
+  FINISH_TASK,
+  SET_TASK_NAME,
+  START_TASK,
+} from "../types";
 
 const initialState = {
   id: "",
@@ -21,6 +26,14 @@ export const currentTaskReducer = (state = initialState, action: any) => {
         ...state,
         timeEnd: payload,
         timeSpend: payload - state.timeStart,
+      };
+    case CLEAR_CURRENT_TASK:
+      return {
+        id: "",
+        taskName: "",
+        timeStart: 0,
+        timeEnd: 0,
+        timeSpend: 0,
       };
     default:
       return state;
