@@ -1,3 +1,5 @@
+import { SET_TASK_NAME } from "../types";
+
 const initialState = {
   id: "",
   taskName: "",
@@ -7,9 +9,11 @@ const initialState = {
 };
 
 export const currentTaskReducer = (state = initialState, action: any) => {
-  const { type } = action;
+  const { type, payload } = action;
 
   switch (type) {
+    case SET_TASK_NAME:
+      return { ...state, taskName: payload };
     default:
       return state;
   }
