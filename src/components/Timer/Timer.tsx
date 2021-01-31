@@ -6,12 +6,18 @@ import MainWrapper from "../Wrappers/MainWrapper";
 import { Input } from "antd";
 import { Button } from "antd";
 // actions
-import { setTaskName } from "../../store/actions/currentTaskActions";
+import {
+  finishTask,
+  setTaskName,
+  startTask,
+} from "../../store/actions/currentTaskActions";
 // styles
 import "./styles.css";
 
-const Timer = ({ currentTask, setTaskName }: any) => {
+const Timer = ({ currentTask, setTaskName, startTask, finishTask }: any) => {
   const { taskName, timeSpend, timeStart: activeTimer } = currentTask;
+
+  const listener = activeTimer ? finishTask : startTask;
 
   return (
     <MainWrapper>
@@ -21,7 +27,9 @@ const Timer = ({ currentTask, setTaskName }: any) => {
         onChange={(e) => setTaskName(e.target.value)}
       />
       <div className="circle-wrapper">00:00:00</div>
-      <Button type="primary">Start</Button>
+      <Button type="primary" onClick={() => listener()}>
+        {activeTimer ? "Stop" : "Start"}
+      </Button>
     </MainWrapper>
   );
 };
@@ -33,6 +41,8 @@ const mapStateToProps = (state: any) => {
 };
 const mapDispatchToProps = {
   setTaskName,
+  startTask,
+  finishTask,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer);

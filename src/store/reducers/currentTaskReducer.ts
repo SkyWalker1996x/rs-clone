@@ -1,4 +1,4 @@
-import { SET_TASK_NAME, START_TASK } from "../types";
+import { FINISH_TASK, SET_TASK_NAME, START_TASK } from "../types";
 
 const initialState = {
   id: "",
@@ -16,6 +16,12 @@ export const currentTaskReducer = (state = initialState, action: any) => {
       return { ...state, taskName: payload };
     case START_TASK:
       return { ...state, ...payload };
+    case FINISH_TASK:
+      return {
+        ...state,
+        timeEnd: payload,
+        timeSpend: payload - state.timeStart,
+      };
     default:
       return state;
   }
