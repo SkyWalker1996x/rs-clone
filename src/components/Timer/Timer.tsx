@@ -15,7 +15,7 @@ import {
 import "./styles.css";
 
 const Timer = ({ currentTask, setTaskName, startTask, finishTask }: any) => {
-  const { taskName, timeSpend, timeStart: activeTimer } = currentTask;
+  const { taskName, timeStart: activeTimer } = currentTask;
 
   const listener = activeTimer ? finishTask : startTask;
 
