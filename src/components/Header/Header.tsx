@@ -3,12 +3,12 @@ import React from "react";
 import "./styles.css";
 
 const Header = () => {
-    return (
-        <header className="header">
-            <h1 className="logo header__logo">RS Clone</h1>
-            <div className="nav-button" />
-        </header>
-    );
+  return (
+    <header className="header">
+      <h1 className="logo header__logo">RS Clone</h1>
+      <div className="nav-button" />
+    </header>
+  );
 };
 
 export default Header;
