@@ -5,7 +5,6 @@ export const transformTasksForTable = (tasks: any) => {
         return {
             number: index + 1,
             ...task,
-            taskName: task.taskName,
             timeStart: convertMsToDate(task.timeStart),
             timeEnd: convertMsToDate(task.timeEnd),
             timeSpend: convertMsToTime(task.timeSpend)
