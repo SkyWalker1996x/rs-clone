@@ -1,13 +1,12 @@
 import React from "react";
 import MainWrapper from "../Wrappers/MainWrapper";
 import './Table.css';
-import convertMsToDate from '../../utils/convertMsToDate';
-import convertMsToTime from '../../utils/convertMsToTime';
+import { transformTasksForTable } from '../../utils/taskGeneratingUtils'
 
 
 import  { RootStateOrAny, useSelector } from 'react-redux';
 
-import { Table } from 'antd';
+import { Button, Table, Space } from 'antd';
 
   
   const columns = [
@@ -36,6 +35,16 @@ import { Table } from 'antd';
         dataIndex: 'timeSpend',
         key: 'timeSpend',
     },
+    {
+        title: 'Action',
+        key: 'action',
+        render: () => (
+            <Space size ="middle">
+                <Button type="primary">Info</Button>
+                <Button type="primary">Delete</Button>
+            </Space>
+        ),
+    }
   ];
 
 
@@ -44,17 +53,12 @@ import { Table } from 'antd';
 const TableTimer: React.FC = () => {
 
     const tasks = useSelector((state: RootStateOrAny) => state.tasks);
-    console.log(tasks);
+    const initialTasks = transformTasksForTable(tasks);
 
-    tasks.map((item: any) => {
-        item.timeStart =  convertMsToDate(item.timeStart);
-        item.timeEnd = convertMsToDate(item.timeEnd);
-        item.timeSpend = convertMsToTime(item.timeSpend);
-    });
 
     return (
         <MainWrapper>
-             <Table dataSource={tasks} columns={columns} />;
+             <Table dataSource={initialTasks} columns={columns} />;
         </MainWrapper>
     )
 }
