@@ -1,23 +1,27 @@
 import React from "react";
+import { Route, Switch } from "react-router-dom";
 // components
-import Header from "./components/Header/Header";
-import Timer from "./components/Timer/Timer";
-import MainWrapper from "./components/Wrappers/MainWrapper";
-import TableTimer from './components/Table/TableTimer';
-import Footer from "./components/Footer/Footer";
+import Main from "./pages/Main";
 // styles
 import "antd/dist/antd.css";
+import TaskPage from "./pages/TaskPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
-    <>
-      <Header />
-      <MainWrapper>
-        <Timer />
-        <TableTimer />
-      </MainWrapper>
-      <Footer />
-    </>
+    <Switch>
+      <Route exact path={["/", "/tasks_chart"]} component={Main} />
+      <Route
+        path="/task/:number"
+        render={({ match }) => {
+          const { number } = match.params;
+
+          return <TaskPage number={number} />;
+        }}
+      />
+
+      <Route render={() => <NotFoundPage />} />
+    </Switch>
   );
 }
 
