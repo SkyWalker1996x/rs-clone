@@ -1,3 +1,5 @@
+import { ADD_TASK } from "../types";
+
 const initialState = [
   {
     id: "36cdfdbb-0ed8-4c6d-8369-ef5f13573671",
@@ -93,9 +95,11 @@ const initialState = [
 ];
 
 export const tasksReducer = (state = initialState, action: any) => {
-  const { type } = action;
+  const { type, payload } = action;
 
   switch (type) {
+    case ADD_TASK:
+      return [...state, payload];
     default:
       return state;
   }
