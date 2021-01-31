@@ -3,11 +3,9 @@ import MainWrapper from "../Wrappers/MainWrapper";
 import { transformTasksForTable } from "../../utils/tasksTransformUtils";
 
 import { RootStateOrAny, useSelector, useDispatch } from "react-redux";
-import { deleteTask } from '../../store/actions/tasksActions';
+import { deleteTask } from "../../store/actions/tasksActions";
 
 import { Button, Table, Space } from "antd";
-
-
 
 const TableTimer: React.FC = () => {
   const tasks = useSelector((state: RootStateOrAny) => state.tasks);
@@ -43,16 +41,21 @@ const TableTimer: React.FC = () => {
     {
       title: "Action",
       key: "action",
-      render: () => (
-        <Space size="middle">
-          <Button type="primary">Info</Button>
-          <Button type="primary" onClick={(e: any) => {
-            const number = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.firstChild.textContent[0];
-            dispatch(deleteTask(tasks[number - 1].id));
-            }
-            }>Delete</Button>
-        </Space>
-      ),
+      render: (props: any) => {
+        return (
+          <Space size="middle">
+            <Button type="primary">Info</Button>
+            <Button
+              type="primary"
+              onClick={() => {
+                dispatch(deleteTask(props.id));
+              }}
+            >
+              Delete
+            </Button>
+          </Space>
+        );
+      },
     },
   ];
 
