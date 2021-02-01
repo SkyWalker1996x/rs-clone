@@ -1,5 +1,5 @@
 import React from "react";
-import TableTimer from '../Table/TableTimer'
+import TableTimer from "../Table/TableTimer";
 
 import { Tabs } from "antd";
 

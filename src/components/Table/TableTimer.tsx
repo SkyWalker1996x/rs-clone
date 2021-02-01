@@ -7,7 +7,6 @@ import { deleteTask } from "../../store/actions/tasksActions";
 
 import { Button, Table, Space } from "antd";
 
-
 const TableTimer: React.FC = () => {
   const tasks = useSelector((state: RootStateOrAny) => state.tasks);
   const initialTasks = transformTasksForTable(tasks);
@@ -62,7 +61,12 @@ const TableTimer: React.FC = () => {
 
   return (
     <MainWrapper>
-      <Table dataSource={initialTasks} columns={columns} pagination={{pageSize: 5}}/>;
+      <Table
+        dataSource={initialTasks}
+        columns={columns}
+        pagination={{ pageSize: 5 }}
+      />
+      ;
     </MainWrapper>
   );
 };

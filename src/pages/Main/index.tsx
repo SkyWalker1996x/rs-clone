@@ -3,7 +3,7 @@ import MainWrapper from "../../components/Wrappers/MainWrapper";
 import Timer from "../../components/Timer/Timer";
 import Footer from "../../components/Footer/Footer";
 import React from "react";
-import { TabsComponent}  from '../../components/Tabs/TabsComponent';
+import { TabsComponent } from "../../components/Tabs/TabsComponent";
 
 const Main = () => {
   return (
