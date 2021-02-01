@@ -66,7 +66,6 @@ const TableTimer: React.FC = () => {
         columns={columns}
         pagination={{ pageSize: 5 }}
       />
-      ;
     </MainWrapper>
   );
 };
