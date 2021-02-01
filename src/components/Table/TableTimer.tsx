@@ -5,9 +5,8 @@ import { transformTasksForTable } from "../../utils/tasksTransformUtils";
 import { RootStateOrAny, useSelector, useDispatch } from "react-redux";
 import { deleteTask } from "../../store/actions/tasksActions";
 
-import { Button, Table, Space, Tabs } from "antd";
+import { Button, Table, Space } from "antd";
 
-const { TabPane } = Tabs;
 
 const TableTimer: React.FC = () => {
   const tasks = useSelector((state: RootStateOrAny) => state.tasks);
@@ -63,14 +62,7 @@ const TableTimer: React.FC = () => {
 
   return (
     <MainWrapper>
-      <Tabs defaultActiveKey="1" centered>
-        <TabPane tab="Tasks log" key="1">
-          <Table dataSource={initialTasks} columns={columns} />;
-        </TabPane>
-        <TabPane tab="Tasks chart" key="2">
-          <h1>There should be tasks chart</h1>
-        </TabPane>
-      </Tabs>
+      <Table dataSource={initialTasks} columns={columns} />;
     </MainWrapper>
   );
 };
