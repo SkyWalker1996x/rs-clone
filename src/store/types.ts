@@ -5,3 +5,4 @@ export const FINISH_TASK = 'FINISH_TASK';
 export const CLEAR_CURRENT_TASK = 'CLEAR_CURRENT_TASK';
 // Tasks
 export const ADD_TASK = 'ADD_TASK';
+export const DELETE_TASK = 'DELETE_TASK';
