@@ -3,6 +3,7 @@ import {
   FINISH_TASK,
   SET_TASK_NAME,
   START_TASK,
+  UPDATE_TIME_SPEND,
 } from "../types";
 
 const initialState = {
@@ -34,6 +35,11 @@ export const currentTaskReducer = (state = initialState, action: any) => {
         timeStart: 0,
         timeEnd: 0,
         timeSpend: 0,
+      };
+    case UPDATE_TIME_SPEND:
+      return {
+        ...state,
+        timeSpend: payload - state.timeStart,
       };
     default:
       return state;

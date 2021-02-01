@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 // components
 import MainWrapper from "../Wrappers/MainWrapper";
@@ -6,11 +6,16 @@ import MainWrapper from "../Wrappers/MainWrapper";
 import { Input } from "antd";
 import { Button } from "antd";
 // actions
-import { setTaskName } from "../../store/actions/currentTaskActions";
+import {
+  setTaskName,
+  updateTimeSpend,
+} from "../../store/actions/currentTaskActions";
 import {
   activateTimer,
   inactivateTimer,
 } from "../../store/actions/activeTimerActions";
+// utils
+import { convertMsToTime } from "../../utils/timeConvertingUtils";
 // styles
 import "./styles.css";
 
@@ -19,8 +24,24 @@ const Timer = ({
   setTaskName,
   activateTimer,
   inactivateTimer,
+  updateTimeSpend,
 }: any) => {
-  const { taskName, timeStart: activeTimer } = currentTask;
+  const { taskName, timeStart: activeTimer, timeSpend } = currentTask;
+  let taskTimer: any = useRef();
+
+  useEffect(() => {
+    if (activeTimer !== 0) {
+      taskTimer.current = setInterval(() => {
+        updateTimeSpend();
+      }, 1000);
+    }
+
+    if (activeTimer === 0) {
+      clearInterval(taskTimer.current);
+    }
+
+    return () => clearInterval(taskTimer.current);
+  }, [activeTimer]);
 
   const listener = activeTimer !== 0 ? inactivateTimer : activateTimer;
 
@@ -31,7 +52,7 @@ const Timer = ({
         value={taskName}
         onChange={(e) => setTaskName(e.target.value)}
       />
-      <div className="circle-wrapper">00:00:00</div>
+      <div className="circle-wrapper">{convertMsToTime(timeSpend)}</div>
       <Button type="primary" onClick={() => listener()}>
         {activeTimer ? "Stop" : "Start"}
       </Button>
@@ -48,6 +69,7 @@ const mapDispatchToProps = {
   setTaskName,
   activateTimer,
   inactivateTimer,
+  updateTimeSpend,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer);

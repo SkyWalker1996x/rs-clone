@@ -1,5 +1,12 @@
-import {CLEAR_CURRENT_TASK, FINISH_TASK, SET_TASK_NAME, START_TASK} from "../types";
-import {v4 as uuidv4} from "uuid";
+import {
+  CLEAR_CURRENT_TASK,
+  FINISH_TASK,
+  SET_TASK_NAME,
+  START_TASK,
+  UPDATE_TIME_SPEND,
+} from "../types";
+import { v4 as uuidv4 } from "uuid";
+import { UpdateTimeSpend } from "../../interfaces/Store";
 
 export const setTaskName: any = (name: any) => {
   return {
@@ -28,5 +35,12 @@ export const finishTask: any = () => {
 export const clearCurrentTask: any = () => {
   return {
     type: CLEAR_CURRENT_TASK,
+  };
+};
+
+export const updateTimeSpend: UpdateTimeSpend = () => {
+  return {
+    type: UPDATE_TIME_SPEND,
+    payload: Date.now(),
   };
 };
