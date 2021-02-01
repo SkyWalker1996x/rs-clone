@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 // components
 import MainWrapper from "../Wrappers/MainWrapper";
@@ -7,17 +7,43 @@ import { Input } from "antd";
 import { Button } from "antd";
 // actions
 import {
-  finishTask,
   setTaskName,
-  startTask,
+  updateTimeSpend,
 } from "../../store/actions/currentTaskActions";
+import {
+  activateTimer,
+  inactivateTimer,
+} from "../../store/actions/activeTimerActions";
+// utils
+import { convertMsToTime } from "../../utils/timeConvertingUtils";
 // styles
 import "./styles.css";
 
-const Timer = ({ currentTask, setTaskName, startTask, finishTask }: any) => {
-  const { taskName, timeStart: activeTimer } = currentTask;
+const Timer = ({
+  currentTask,
+  setTaskName,
+  activateTimer,
+  inactivateTimer,
+  updateTimeSpend,
+}: any) => {
+  const { taskName, timeStart: activeTimer, timeSpend } = currentTask;
+  let taskTimer: any = useRef();
 
-  const listener = activeTimer ? finishTask : startTask;
+  useEffect(() => {
+    if (activeTimer !== 0) {
+      taskTimer.current = setInterval(() => {
+        updateTimeSpend();
+      }, 1000);
+    }
+
+    if (activeTimer === 0) {
+      clearInterval(taskTimer.current);
+    }
+
+    return () => clearInterval(taskTimer.current);
+  }, [activeTimer]);
+
+  const listener = activeTimer !== 0 ? inactivateTimer : activateTimer;
 
   return (
     <MainWrapper>
@@ -26,7 +52,7 @@ const Timer = ({ currentTask, setTaskName, startTask, finishTask }: any) => {
         value={taskName}
         onChange={(e) => setTaskName(e.target.value)}
       />
-      <div className="circle-wrapper">00:00:00</div>
+      <div className="circle-wrapper">{convertMsToTime(timeSpend)}</div>
       <Button type="primary" onClick={() => listener()}>
         {activeTimer ? "Stop" : "Start"}
       </Button>
@@ -41,8 +67,9 @@ const mapStateToProps = (state: any) => {
 };
 const mapDispatchToProps = {
   setTaskName,
-  startTask,
-  finishTask,
+  activateTimer,
+  inactivateTimer,
+  updateTimeSpend,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer);
