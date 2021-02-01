@@ -6,18 +6,23 @@ import MainWrapper from "../Wrappers/MainWrapper";
 import { Input } from "antd";
 import { Button } from "antd";
 // actions
+import { setTaskName } from "../../store/actions/currentTaskActions";
 import {
-  finishTask,
-  setTaskName,
-  startTask,
-} from "../../store/actions/currentTaskActions";
+  activateTimer,
+  inactivateTimer,
+} from "../../store/actions/activeTimerActions";
 // styles
 import "./styles.css";
 
-const Timer = ({ currentTask, setTaskName, startTask, finishTask }: any) => {
+const Timer = ({
+  currentTask,
+  setTaskName,
+  activateTimer,
+  inactivateTimer,
+}: any) => {
   const { taskName, timeStart: activeTimer } = currentTask;
 
-  const listener = activeTimer ? finishTask : startTask;
+  const listener = activeTimer !== 0 ? inactivateTimer : activateTimer;
 
   return (
     <MainWrapper>
@@ -41,8 +46,8 @@ const mapStateToProps = (state: any) => {
 };
 const mapDispatchToProps = {
   setTaskName,
-  startTask,
-  finishTask,
+  activateTimer,
+  inactivateTimer,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer);
