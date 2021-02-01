@@ -62,7 +62,7 @@ const TableTimer: React.FC = () => {
 
   return (
     <MainWrapper>
-      <Table dataSource={initialTasks} columns={columns} />;
+      <Table dataSource={initialTasks} columns={columns} pagination={{pageSize: 5}}/>;
     </MainWrapper>
   );
 };
