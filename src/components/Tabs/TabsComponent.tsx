@@ -1,5 +1,6 @@
 import React from "react";
 import TableTimer from "../Table/TableTimer";
+import Chart from '../Chart/Chart';
 
 import { Tabs } from "antd";
 
@@ -12,7 +13,7 @@ export const TabsComponent: React.FC = () => {
         <TableTimer />
       </TabPane>
       <TabPane tab="Tasks chart" key="2">
-        <h1> Task Chart</h1>
+        <Chart />
       </TabPane>
     </Tabs>
   );
