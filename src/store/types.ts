@@ -10,3 +10,4 @@ export const UPDATE_TIME_SPEND = 'UPDATE_TIME_SPEND';
 // Tasks
 export const ADD_TASK = "ADD_TASK";
 export const DELETE_TASK = "DELETE_TASK";
+export const GENERATE_TASKS = 'GENERATE_TASKS';

@@ -41,7 +41,7 @@ const Timer = ({
     }
 
     return () => clearInterval(taskTimer.current);
-  }, [activeTimer]);
+  }, [activeTimer, updateTimeSpend]);
 
   const listener = activeTimer !== 0 ? inactivateTimer : activateTimer;
 
