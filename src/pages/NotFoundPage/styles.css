@@ -26,15 +26,16 @@
 
 .error-button {
   display: inline-block;
-  padding: 10px 25px;
+  padding: 5px 15px;
   margin-top: 30px;
   color: #ffffff;
   background-color: #1890ff;
-  border: 1px solid darkblue;
-  border-radius: 10px;
+  border: 1px solid #1890ff;
+  box-shadow: 0 2px 0 rgba(0 0 0 5%);
   transition: all 0.5s ease 0s;
 }
 .error-button:hover {
   color: #ffffff;
-  background-color: darkblue;
+  background-color: #40a9ff;
+  border-color: #40a9ff;
 }
