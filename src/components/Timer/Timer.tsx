@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 // components
 import MainWrapper from "../Wrappers/MainWrapper";
@@ -18,6 +18,7 @@ import {
 import { convertMsToTime } from "../../utils/timeConvertingUtils";
 // styles
 import "./styles.css";
+import EmptyTaskWarning from "./EmptyTaskWarning/EmptyTaskWarning";
 
 const Timer = ({
   currentTask,
@@ -28,6 +29,20 @@ const Timer = ({
 }: any) => {
   const { taskName, timeStart: activeTimer, timeSpend } = currentTask;
   let taskTimer: any = useRef();
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   useEffect(() => {
     if (activeTimer !== 0) {
@@ -43,7 +58,10 @@ const Timer = ({
     return () => clearInterval(taskTimer.current);
   }, [activeTimer, updateTimeSpend]);
 
-  const listener = activeTimer !== 0 ? inactivateTimer : activateTimer;
+  const inactivateListener =
+    taskName.trim() === "" ? showModal : inactivateTimer;
+
+  const listener = activeTimer !== 0 ? inactivateListener : activateTimer;
 
   return (
     <MainWrapper>
@@ -56,6 +74,11 @@ const Timer = ({
       <Button type="primary" onClick={() => listener()}>
         {activeTimer ? "Stop" : "Start"}
       </Button>
+      <EmptyTaskWarning
+        handleOk={handleOk}
+        isModalVisible={isModalVisible}
+        handleCancel={handleCancel}
+      />
     </MainWrapper>
   );
 };
