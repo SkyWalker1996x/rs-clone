@@ -21,7 +21,8 @@
   margin: 0;
   font-size: 10rem;
   line-height: 3rem;
-  color: #ffffff;
+  font-weight: bold;
+  color: #7e7e7e;
 }
 
 .error-button {
@@ -31,7 +32,7 @@
   color: #ffffff;
   background-color: #1890ff;
   border: 1px solid #1890ff;
-  box-shadow: 0 2px 0 rgba(0 0 0 5%);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 5%);
   transition: all 0.5s ease 0s;
 }
 .error-button:hover {
