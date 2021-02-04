@@ -1,18 +1,124 @@
-import React from "react";
+import React, { useState } from "react";
+import Highlighter from "react-highlight-words";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+// components
 import MainWrapper from "../Wrappers/MainWrapper";
 import { transformTasksForTable } from "../../utils/tasksTransformUtils";
-import { useHistory } from "react-router-dom";
-
-import { RootStateOrAny, useSelector, useDispatch } from "react-redux";
+// antd
+import { Button, Table, Space, Input } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+// redux
 import { deleteTask } from "../../store/actions/tasksActions";
-
-import { Button, Table, Space } from "antd";
+import { State } from "../../interfaces/Store";
 
 const TableTimer: React.FC = () => {
-  const tasks = useSelector((state: RootStateOrAny) => state.tasks);
+  const tasks = useSelector((state: State) => state.tasks);
   const initialTasks = transformTasksForTable(tasks);
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const [search, setSearch] = useState({
+    searchText: "",
+    searchedColumn: "",
+  });
+  const { searchText, searchedColumn } = search;
+
+  const handleSearch = (
+    selectedKeys: string,
+    confirm: any,
+    dataIndex: string
+  ) => {
+    confirm();
+    setSearch({
+      searchText: selectedKeys[0],
+      searchedColumn: dataIndex,
+    });
+  };
+
+  const handleReset = (clearFilters: any) => {
+    clearFilters();
+    setSearch((prevState: { searchText: string; searchedColumn: string }) => {
+      return {
+        ...prevState,
+        searchText: "",
+      };
+    });
+  };
+  let searchInput: any;
+  const getColumnSearchProps = (dataIndex: any) => ({
+    // eslint-disable-next-line
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters,
+    }: any) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          ref={(node) => {
+            searchInput = node;
+          }}
+          placeholder={`Search task name`}
+          value={selectedKeys[0]}
+          onChange={(e) =>
+            setSelectedKeys(e.target.value ? [e.target.value] : [])
+          }
+          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{ width: 188, marginBottom: 8, display: "block" }}
+          key={`SearchInput${dataIndex}`}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+            key="SearchInputButtonSearch"
+          >
+            Search
+          </Button>
+          <Button
+            key="SearchInputButtonReset"
+            onClick={() => handleReset(clearFilters)}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Reset
+          </Button>
+        </Space>
+      </div>
+    ),
+    // eslint-disable-next-line
+    filterIcon: (filtered: any) => (
+      <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
+    ),
+    onFilter: (value: any, record: any) =>
+      record[dataIndex]
+        ? record[dataIndex]
+            .toString()
+            .toLowerCase()
+            .includes(value.toLowerCase())
+        : "",
+    // eslint-disable-next-line
+    onFilterDropdownVisibleChange: (visible: any) => {
+      if (visible) {
+        setTimeout(() => searchInput.select(), 100);
+      }
+    },
+    render: (text: any) =>
+      searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
+          searchWords={[searchText]}
+          autoEscape
+          textToHighlight={text ? text.toString() : ""}
+        />
+      ) : (
+        text
+      ),
+  });
 
   const columns = [
     {
@@ -24,6 +130,7 @@ const TableTimer: React.FC = () => {
       title: "Task",
       dataIndex: "taskName",
       key: "taskName",
+      ...getColumnSearchProps("taskName"),
     },
     {
       title: "Time start",
