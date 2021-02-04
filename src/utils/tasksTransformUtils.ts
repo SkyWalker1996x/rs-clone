@@ -1,8 +1,24 @@
-import { convertMsToDate, convertMsToTime } from "./timeConvertingUtils";
 import { Tasks } from "../interfaces/Store";
 import { TaskForTable } from "../interfaces/Utils";
+import {convertMsToDate, convertMsToTime} from "./timeConvertingUtils";
 
 export const transformTasksForTable = (tasks: Tasks) => {
+  return tasks.map((task: any, index: number) => {
+    return {
+      key: index,
+      number: index + 1,
+      ...task,
+      timeStart: task.timeStart,
+      timeEnd: task.timeEnd,
+      timeSpend: task.timeSpend,
+      /*timeStart: convertMsToDate(task.timeStart),
+      timeEnd: convertMsToDate(task.timeEnd),
+      timeSpend: convertMsToTime(task.timeSpend),*/
+    };
+  });
+};
+
+export const transformTasksForPageInfo = (tasks: Tasks) => {
   return tasks.map((task: any, index: number) => {
     return {
       key: index,

@@ -4,9 +4,9 @@ export interface TaskForTable {
   number: number;
   id: string;
   taskName: string;
-  timeStart: string;
-  timeEnd: string;
-  timeSpend: string;
+  timeStart: number;
+  timeEnd: number;
+  timeSpend: number;
 }
 
 export type TasksForTable = Array<TaskForTable>;

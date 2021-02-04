@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import {
   toPageInfo,
   toSentenceText,
-  transformTasksForTable,
+  transformTasksForPageInfo,
 } from "../../utils/tasksTransformUtils";
 import NotFoundPage from "../NotFoundPage";
 import "./styles.css";
@@ -14,7 +14,7 @@ import { ArrowLeftOutlined } from "@ant-design/icons";
 
 const TaskPage = ({ number }: any) => {
   const tasks = useSelector((state: State) => state.tasks);
-  const pageTask = transformTasksForTable(tasks).find(
+  const pageTask = transformTasksForPageInfo(tasks).find(
     (item) => item.number === +number
   );
 
