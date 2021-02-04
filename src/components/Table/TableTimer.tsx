@@ -1,6 +1,7 @@
 import React from "react";
 import MainWrapper from "../Wrappers/MainWrapper";
 import { transformTasksForTable } from "../../utils/tasksTransformUtils";
+import { useHistory } from "react-router-dom";
 
 import { RootStateOrAny, useSelector, useDispatch } from "react-redux";
 import { deleteTask } from "../../store/actions/tasksActions";
@@ -11,6 +12,7 @@ const TableTimer: React.FC = () => {
   const tasks = useSelector((state: RootStateOrAny) => state.tasks);
   const initialTasks = transformTasksForTable(tasks);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const columns = [
     {
@@ -44,7 +46,14 @@ const TableTimer: React.FC = () => {
       render: (props: any) => {
         return (
           <Space size="middle">
-            <Button type="primary">Info</Button>
+            <Button
+              type="primary"
+              onClick={() => {
+                history.push(`/task/${props.number}`);
+              }}
+            >
+              Info
+            </Button>
             <Button
               type="primary"
               onClick={() => {

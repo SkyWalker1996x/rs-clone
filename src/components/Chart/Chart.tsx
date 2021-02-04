@@ -19,7 +19,7 @@ import {
       return (
         <>
         <BarChart
-          width={900}
+          width={700}
           height={230}
           data={tasksToChart}
           margin={{
