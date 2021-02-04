@@ -1,6 +1,6 @@
 import { Tasks } from "../interfaces/Store";
-import { TaskForTable } from "../interfaces/Utils";
-import {convertMsToDate, convertMsToTime} from "./timeConvertingUtils";
+import { TaskForPage } from "../interfaces/Utils";
+import { convertMsToDate, convertMsToTime } from "./timeConvertingUtils";
 
 export const transformTasksForTable = (tasks: Tasks) => {
   return tasks.map((task: any, index: number) => {
@@ -112,7 +112,7 @@ export const toSentenceText = (camelCase: string) => {
   return capitalLetters;
 };
 
-export const toPageInfo = (task: TaskForTable) => {
+export const toPageInfo = (task: TaskForPage) => {
   const { taskName, timeStart, timeEnd, timeSpend } = task;
 
   return {
@@ -122,3 +122,4 @@ export const toPageInfo = (task: TaskForTable) => {
     timeEnd,
   };
 };
+

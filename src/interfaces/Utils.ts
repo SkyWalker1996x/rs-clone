@@ -9,6 +9,15 @@ export interface TaskForTable {
   timeSpend: number;
 }
 
+export interface TaskForPage {
+  number: number;
+  id: string;
+  taskName: string;
+  timeStart: string;
+  timeEnd: string;
+  timeSpend: string;
+}
+
 export type TasksForTable = Array<TaskForTable>;
 
 export type GetRandomNumber = (min: number, max: number) => number;
