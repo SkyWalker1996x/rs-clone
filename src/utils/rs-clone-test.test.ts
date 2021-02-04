@@ -3,15 +3,14 @@ import {
   transformTasksForTable,
   toSentenceText,
   toPageInfo,
+  transformTasksForPageInfo,
 } from "./tasksTransformUtils";
 import {
   toDecimal,
   convertMsToDate,
   convertMsToTime,
 } from "./timeConvertingUtils";
-import {
-  getRandomNumber
-} from "./generateTaskUtils";
+import { getRandomNumber } from "./generateTaskUtils";
 
 const preTaskData = [
   {
@@ -205,36 +204,36 @@ const afterTableTaskData = [
     number: 1,
     id: "36cdfdbb-0ed8-4c6d-8369-ef5f13573671",
     taskName: "Task 36cdfdbb",
-    timeStart: "08:07:25",
-    timeEnd: "09:14:40",
-    timeSpend: "01:07:15",
+    timeStart: 1611641245662,
+    timeEnd: 1611645280905,
+    timeSpend: 4035243,
   },
   {
     key: 1,
     number: 2,
     id: "7cd291a7-de7a-4422-a0fb-4835edf3cd72",
     taskName: "Task 7cd291a7",
-    timeStart: "21:35:50",
-    timeEnd: "22:58:31",
-    timeSpend: "01:22:41",
+    timeStart: 1611689750913,
+    timeEnd: 1611694711988,
+    timeSpend: 4961075,
   },
   {
     key: 2,
     number: 3,
     id: "69703861-acfc-4bee-85a4-ab293997e015",
     taskName: "Super Task",
-    timeStart: "22:12:29",
-    timeEnd: "22:13:05",
-    timeSpend: "00:00:36",
+    timeStart: 1612383149160,
+    timeEnd: 1612383185980,
+    timeSpend: 36820,
   },
   {
     key: 3,
     number: 4,
     id: "a4fa0575-31ae-4241-905a-aecdd76ee531",
     taskName: "Test Task",
-    timeStart: "10:29:57",
-    timeEnd: "12:06:07",
-    timeSpend: "01:36:09",
+    timeStart: 1612427397187,
+    timeEnd: 1612433167135,
+    timeSpend: 5769948,
   },
 ];
 
@@ -284,5 +283,83 @@ describe("Correct a random number", () => {
   });
   it("A random number should be less than second argument", () => {
     expect(getRandomNumber(10, 20)).toBeLessThan(21);
+  });
+});
+
+const prePageTaskData = [
+  {
+    id: "36cdfdbb-0ed8-4c6d-8369-ef5f13573671",
+    taskName: "Task 36cdfdbb",
+    timeStart: 1611641245662,
+    timeEnd: 1611645280905,
+    timeSpend: 4035243,
+  },
+  {
+    id: "7cd291a7-de7a-4422-a0fb-4835edf3cd72",
+    taskName: "Task 7cd291a7",
+    timeStart: 1611689750913,
+    timeEnd: 1611694711988,
+    timeSpend: 4961075,
+  },
+  {
+    id: "69703861-acfc-4bee-85a4-ab293997e015",
+    taskName: "Super Task",
+    timeStart: 1612383149160,
+    timeEnd: 1612383185980,
+    timeSpend: 36820,
+  },
+  {
+    id: "a4fa0575-31ae-4241-905a-aecdd76ee531",
+    taskName: "Test Task",
+    timeStart: 1612427397187,
+    timeEnd: 1612433167135,
+    timeSpend: 5769948,
+  },
+];
+
+const afterPageTaskData = [
+  {
+    key: 0,
+    number: 1,
+    id: "36cdfdbb-0ed8-4c6d-8369-ef5f13573671",
+    taskName: "Task 36cdfdbb",
+    timeStart: "08:07:25",
+    timeEnd: "09:14:40",
+    timeSpend: "01:07:15",
+  },
+  {
+    key: 1,
+    number: 2,
+    id: "7cd291a7-de7a-4422-a0fb-4835edf3cd72",
+    taskName: "Task 7cd291a7",
+    timeStart: "21:35:50",
+    timeEnd: "22:58:31",
+    timeSpend: "01:22:41",
+  },
+  {
+    key: 2,
+    number: 3,
+    id: "69703861-acfc-4bee-85a4-ab293997e015",
+    taskName: "Super Task",
+    timeStart: "22:12:29",
+    timeEnd: "22:13:05",
+    timeSpend: "00:00:36",
+  },
+  {
+    key: 3,
+    number: 4,
+    id: "a4fa0575-31ae-4241-905a-aecdd76ee531",
+    taskName: "Test Task",
+    timeStart: "10:29:57",
+    timeEnd: "12:06:07",
+    timeSpend: "01:36:09",
+  },
+];
+
+describe("Correct table data", () => {
+  it("Object with a task-information correct transform to object with an object for table", () => {
+    expect(transformTasksForPageInfo(prePageTaskData)).toEqual(
+      afterPageTaskData
+    );
   });
 });
