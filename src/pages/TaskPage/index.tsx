@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { State } from "../../interfaces/Store";
+import { Link } from "react-router-dom";
 import {
   toPageInfo,
   toSentenceText,
@@ -8,7 +9,8 @@ import {
 } from "../../utils/tasksTransformUtils";
 import NotFoundPage from "../NotFoundPage";
 import "./styles.css";
-import { Card } from "antd";
+import { Button, Card } from "antd";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 
 const TaskPage = ({ number }: any) => {
   const tasks = useSelector((state: State) => state.tasks);
@@ -31,6 +33,11 @@ const TaskPage = ({ number }: any) => {
               </p>
             );
           })}
+          <Link to="/">
+            <Button type="primary" icon={<ArrowLeftOutlined />}>
+              To main
+            </Button>
+          </Link>
         </Card>
       </div>
     </div>
